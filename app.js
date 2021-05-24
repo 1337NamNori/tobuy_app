@@ -3,6 +3,8 @@ const expressLayouts = require('express-ejs-layouts');
 const path = require('path');
 const mongoose = require('mongoose');
 
+const PORT = process.env.PORT || 3000;
+
 const Item = require('./models/Item.js');
 
 const app = express();
@@ -16,8 +18,8 @@ mongoose.connect(mongodb, {
     useFindAndModify: false,
 }).then(() => {
     console.log('Database is connected');
-    app.listen(3000, () => {
-        console.log('Access http://localhost:3000');
+    app.listen(PORT, () => {
+        console.log(`Access http://localhost:${PORT}`);
     });
 }).catch(err => {
     console.log(err);
