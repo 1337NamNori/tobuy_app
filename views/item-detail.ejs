@@ -1,0 +1,32 @@
+<div class="col s12 m7">
+    <h2 class="header">Item Details</h2>
+    <div class="card horizontal">
+        <div class="card-stacked">
+            <div class="card-content">
+                <p>Item Name: <%= item.name %>
+                </p>
+                <p>Item Price: $<%= item.price %>
+                </p>
+            </div>
+            <div class="card-action">
+                <a id="delete-btn" href="#" data-id="<%= item._id %> ">DELETE</a>
+                <a href="#">EDIT</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#delete-btn').click(function (e) {
+            e.preventDefault();
+            const id = $(this).attr('data-id');
+            const endpoint = `/item/${id}`;
+            fetch(endpoint, { method: 'DELETE' })
+                .then(res => res.json())
+                .then(data => {
+                    window.location.href = data.redirect;
+                })
+                .catch(err => console.log(err))
+        })
+    })
+</script>
